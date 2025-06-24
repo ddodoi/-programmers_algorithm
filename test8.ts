@@ -1,11 +1,19 @@
-function solution8(s: string): string {
-  let deleted_s: string = "";
-  for (let i = 0; i < s.length - 1; i++) {
-    if (s[i] === s[i + 1]) {
-      deleted_s = s.slice(0, i - 1) + s.slice(i + 1);
+function solution8(s: string): number {
+  let stack: string[] = [];
+
+  for (let i of s) {
+    if (
+      stack[stack.length - 1] === undefined ||
+      i !== stack[stack.length - 1]
+    ) {
+      stack.push(i);
+    } else if (i === stack[stack.length - 1]) {
+      stack.pop();
     }
   }
-  return deleted_s;
+
+  return stack.length === 0 ? 1 : 0;
 }
 
 console.log(solution8("baabaa"));
+console.log(solution8("cdcd"));
